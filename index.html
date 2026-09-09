@@ -310,44 +310,13 @@
       100% { transform: translate(var(--tx), var(--ty)) scale(0) rotate(360deg); opacity: 0; }
     }
 
-    #milestone-banner {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      z-index: 2000;
-      text-align: center;
-      pointer-events: none;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;
-      opacity: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+    
 
-    #milestone-banner.show {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
-    }
+    
 
-    .ms-title {
-      font-size: clamp(2.5rem, 9vw, 5.5rem);
-      font-weight: 900;
-      background: linear-gradient(90deg, #ff0844, #ffb199, #ffd200, #00f2fe, #4facfe);
-      background-size: 250% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmer 2s linear infinite;
-      filter: drop-shadow(0 8px 32px rgba(255, 215, 0, 0.7));
-    }
+    
 
-    .ms-sub {
-      font-size: clamp(1.2rem, 3.5vw, 2rem);
-      color: #fff;
-      margin-top: 10px;
-      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
-    }
+    
 
     #bottom-hint {
       position: fixed;
@@ -409,10 +378,7 @@
 
   <main id="popup-layer"></main>
 
-  <div id="milestone-banner">
-    <div class="ms-title" id="ms-title">🎉 SUPERSTAR!</div>
-    <div class="ms-sub" id="ms-sub">100 SMASHES COMPLETED!</div>
-  </div>
+
 
   <div id="bottom-hint">✨ Press any key or tap anywhere to play! ✨</div>
 
@@ -718,33 +684,10 @@
         }
       }
 
-      checkMilestones();
+      
     }
 
-    const MILESTONES = {
-      10: { title: '🎉 10 SMASHES!', sub: 'Awesome Tiny Fingers!' },
-      25: { title: '⭐ 25 SMASHES!', sub: 'You Are Doing Fantastic!' },
-      50: { title: '🚀 50 SMASHES!', sub: 'Super Fast Typing Champion!' },
-      100: { title: '👑 100 SMASHES!', sub: 'SUPERSTAR! We Love You!' },
-      200: { title: '🌟 200 SMASHES!', sub: 'SubhAadar Legend!' },
-      500: { title: '🏆 500 SMASHES!', sub: 'Ultimate Typing Genius!' }
-    };
-
-    const milestoneBanner = document.getElementById('milestone-banner');
-    const msTitle = document.getElementById('ms-title');
-    const msSub = document.getElementById('ms-sub');
-
-    function checkMilestones() {
-      const milestone = MILESTONES[smashCount];
-      if (!milestone) return;
-
-      msTitle.textContent = milestone.title;
-      msSub.textContent = milestone.sub;
-      milestoneBanner.classList.add('show');
-
-      for (let i = 0; i < 6; i++) {
-        setTimeout(() => {
-          const { x, y } = getRandomScreenCoords();
+    = getRandomScreenCoords();
           spawnPhoto(x, y);
         }, i * 280);
       }
