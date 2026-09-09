@@ -671,38 +671,31 @@
       
     }
 
-    = getRandomScreenCoords();
-          spawnPhoto(x, y);
-        }, i * 280);
-      }
 
-      setTimeout(() => {
-        milestoneBanner.classList.remove('show');
-      }, 2600);
-    }
 
     // Keyboard event listener (press any key -> pop anywhere on screen)
     document.addEventListener('keydown', e => {
       if (!['F5', 'F11', 'F12'].includes(e.key) && !e.ctrlKey && !e.metaKey) {
         e.preventDefault();
       }
+      getAudioContext();
       triggerAction(e.key.length === 1 ? e.key : null);
     });
 
-    // Mouse / Pointer click listener (click anywhere -> pop anywhere on screen)
-    document.addEventListener('pointerdown', e => {
-      if (e.target.closest('#top-hud')) return;
+    // Robust Mobile & Desktop Touch / Click Handler
+    let lastTapTime = 0;
+    function onScreenTap(e) {
+      if (e.target && e.target.closest && e.target.closest('#top-hud')) return;
+      const now = Date.now();
+      if (now - lastTapTime < 50) return; // Prevent double-trigger on mobile
+      lastTapTime = now;
+      getAudioContext();
       triggerAction(null);
-    });
+    }
 
-    // Touch listener for mobile & tablets (multi-touch supported)
-    document.addEventListener('touchstart', e => {
-      if (e.target.closest('#top-hud')) return;
-      e.preventDefault();
-      Array.from(e.changedTouches).forEach(() => {
-        triggerAction(null);
-      });
-    }, { passive: false });
+    window.addEventListener('pointerdown', onScreenTap, { passive: true });
+    window.addEventListener('touchstart', onScreenTap, { passive: true });
+    window.addEventListener('click', onScreenTap, { passive: true });
 
     // HUD controls
     const themeSelect = document.getElementById('theme-selector');
