@@ -196,35 +196,35 @@
 
     .burst-letter {
       position: absolute;
-      font-size: clamp(4.5rem, 14vw, 11rem);
+      font-size: clamp(5.5rem, 18vw, 13rem);
       font-weight: 900;
       line-height: 1;
       text-align: center;
       transform: translate(-50%, -50%);
       will-change: transform, opacity;
-      animation: popLetter 1.2s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
-      filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.6));
+      animation: popLetter 1.25s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+      filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.65));
     }
 
     @keyframes popLetter {
       0% { transform: translate(-50%, -50%) scale(0.2) rotate(calc(var(--rot) * -1.5)); opacity: 0; }
-      30% { transform: translate(-50%, -50%) scale(1.25) rotate(var(--rot)); opacity: 1; }
+      25% { transform: translate(-50%, -50%) scale(1.3) rotate(var(--rot)); opacity: 1; }
       70% { transform: translate(-50%, -50%) scale(1.05) rotate(calc(var(--rot) * 0.4)); opacity: 1; }
-      100% { transform: translate(-50%, calc(-50% - 120px)) scale(0.7) rotate(calc(var(--rot) * 2)); opacity: 0; }
+      100% { transform: translate(-50%, calc(-50% - 130px)) scale(0.65) rotate(calc(var(--rot) * 2)); opacity: 0; }
     }
 
     .burst-emoji {
       position: absolute;
-      font-size: clamp(4rem, 12vw, 9rem);
+      font-size: clamp(5rem, 16vw, 11rem);
       transform: translate(-50%, -50%);
       will-change: transform, opacity;
       animation: popEmoji 1.3s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
-      filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.5));
+      filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55));
     }
 
     @keyframes popEmoji {
       0% { transform: translate(-50%, -50%) scale(0) rotate(-35deg); opacity: 0; }
-      35% { transform: translate(-50%, -50%) scale(1.35) rotate(15deg); opacity: 1; }
+      30% { transform: translate(-50%, -50%) scale(1.4) rotate(15deg); opacity: 1; }
       75% { transform: translate(-50%, -50%) scale(1.1) rotate(-8deg); opacity: 1; }
       100% { transform: translate(-50%, calc(-50% - 140px)) scale(0.5) rotate(25deg); opacity: 0; }
     }
@@ -242,22 +242,22 @@
     }
 
     .burst-photo-img {
-      width: clamp(140px, 28vw, 260px);
+      width: clamp(170px, 34vw, 300px);
       height: auto;
-      max-height: clamp(160px, 32vw, 300px);
+      max-height: clamp(190px, 38vw, 330px);
       object-fit: contain;
-      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.95))
-              drop-shadow(0 0 35px rgba(255, 105, 180, 0.85))
-              drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7));
+      filter: drop-shadow(0 0 24px rgba(255, 215, 0, 0.95))
+              drop-shadow(0 0 40px rgba(255, 105, 180, 0.85))
+              drop-shadow(0 16px 36px rgba(0, 0, 0, 0.7));
       animation: photoWiggle 1.8s ease-in-out infinite alternate;
     }
 
     .burst-photo-badge {
       margin-top: 8px;
-      padding: 6px 18px;
+      padding: 7px 20px;
       border-radius: 999px;
       color: #fff;
-      font-size: clamp(0.85rem, 2.5vw, 1.2rem);
+      font-size: clamp(0.95rem, 2.8vw, 1.3rem);
       font-weight: 900;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
       border: 2px solid #ffffff;
@@ -267,7 +267,7 @@
 
     @keyframes popPhoto {
       0% { transform: translate(-50%, -50%) scale(0) rotate(-25deg); opacity: 0; }
-      25% { transform: translate(-50%, -50%) scale(1.2) rotate(8deg); opacity: 1; }
+      25% { transform: translate(-50%, -50%) scale(1.22) rotate(8deg); opacity: 1; }
       50% { transform: translate(-50%, -50%) scale(1.0) rotate(-4deg); opacity: 1; }
       80% { transform: translate(-50%, -50%) scale(1.0) rotate(2deg); opacity: 1; }
       100% { transform: translate(-50%, calc(-50% - 150px)) scale(0.6) rotate(-15deg); opacity: 0; }
@@ -300,7 +300,7 @@
 
     .sparkle-star {
       position: absolute;
-      font-size: clamp(1.2rem, 3.5vw, 2.4rem);
+      font-size: clamp(1.4rem, 4vw, 2.6rem);
       pointer-events: none;
       animation: starFlight var(--dur, 0.9s) ease-out forwards;
     }
@@ -308,64 +308,6 @@
     @keyframes starFlight {
       0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
       100% { transform: translate(var(--tx), var(--ty)) scale(0) rotate(360deg); opacity: 0; }
-    }
-
-    #virtual-keyboard {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 900;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      padding: 10px 8px max(12px, env(safe-area-inset-bottom, 12px));
-      background: linear-gradient(to bottom, rgba(5, 14, 26, 0.1) 0%, rgba(5, 14, 26, 0.88) 28%, rgba(5, 14, 26, 0.98) 100%);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .vk-row {
-      display: flex;
-      justify-content: center;
-      gap: 4px;
-      width: 100%;
-    }
-
-    .vk-key {
-      flex: 1;
-      max-width: 54px;
-      height: clamp(44px, 7vh, 56px);
-      border-radius: 10px;
-      border: 1.5px solid rgba(255, 255, 255, 0.22);
-      background: rgba(255, 255, 255, 0.12);
-      color: #ffffff;
-      font-family: inherit;
-      font-size: clamp(1rem, 3.8vw, 1.3rem);
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      transition: background 0.1s, transform 0.08s;
-      -webkit-tap-highlight-color: transparent;
-      outline: none;
-    }
-
-    .vk-key:active, .vk-key.pressed {
-      background: rgba(255, 255, 255, 0.45);
-      transform: scale(0.92);
-      border-color: #ffd700;
-    }
-
-    .vk-key.special-key {
-      max-width: 76px;
-      font-size: 0.85rem;
-      background: rgba(255, 182, 79, 0.22);
-      border-color: rgba(255, 182, 79, 0.45);
-      color: #ffd700;
     }
 
     #milestone-banner {
@@ -409,17 +351,17 @@
 
     #bottom-hint {
       position: fixed;
-      bottom: 18px;
+      bottom: 22px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 800;
-      font-size: 0.95rem;
+      font-size: clamp(0.95rem, 2.5vw, 1.15rem);
       font-weight: 700;
       color: var(--tf-muted);
       background: rgba(11, 29, 51, 0.65);
-      padding: 6px 18px;
+      padding: 8px 24px;
       border-radius: 999px;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       letter-spacing: 0.5px;
       pointer-events: none;
       animation: pulseHint 2.5s ease-in-out infinite;
@@ -427,12 +369,7 @@
 
     @keyframes pulseHint {
       0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(0.98); }
-      50% { opacity: 0.9; transform: translateX(-50%) scale(1.02); }
-    }
-
-    @media (max-width: 768px) {
-      #bottom-hint { display: none; }
-      body { padding-bottom: 230px; }
+      50% { opacity: 0.95; transform: translateX(-50%) scale(1.02); }
     }
   </style>
 </head>
@@ -478,13 +415,6 @@
   </div>
 
   <div id="bottom-hint">✨ Press any key or tap anywhere to play! ✨</div>
-
-  <nav id="virtual-keyboard" aria-label="Virtual Toddler Keyboard">
-    <div class="vk-row" id="vk-row-num"></div>
-    <div class="vk-row" id="vk-row-1"></div>
-    <div class="vk-row" id="vk-row-2"></div>
-    <div class="vk-row" id="vk-row-3"></div>
-  </nav>
 
   <script>
 
@@ -697,7 +627,7 @@
       el.style.top = y + 'px';
       el.style.color = color;
       el.style.setProperty('--rot', ((Math.random() - 0.5) * 40) + 'deg');
-      el.style.textShadow = `0 0 25px ${color}, 0 8px 30px rgba(0,0,0,0.7)`;
+      el.style.textShadow = `0 0 28px ${color}, 0 8px 30px rgba(0,0,0,0.7)`;
       popupLayer.appendChild(el);
       setTimeout(() => el.remove(), 1300);
     }
@@ -743,10 +673,21 @@
       setTimeout(() => wrapper.remove(), 2300);
     }
 
-    function triggerAction(char, explicitX, explicitY) {
-      const margin = 100;
-      const x = explicitX !== undefined ? explicitX : Math.max(margin, Math.min(window.innerWidth - margin, lastX + (Math.random() - 0.5) * 80));
-      const y = explicitY !== undefined ? explicitY : Math.max(margin + 50, Math.min(window.innerHeight - margin - 150, lastY + (Math.random() - 0.5) * 80));
+    /* Generates random coordinates anywhere on screen */
+    function getRandomScreenCoords() {
+      const marginX = Math.min(150, window.innerWidth * 0.18);
+      const marginTop = 100; // clear the top HUD
+      const marginBottom = 90;
+      
+      const x = Math.random() * (window.innerWidth - 2 * marginX) + marginX;
+      const y = Math.random() * (window.innerHeight - marginTop - marginBottom) + marginTop;
+      return { x, y };
+    }
+
+    /* Main Trigger: Exactly ONE popup per click/press, scattered anywhere on screen */
+    function triggerAction(char) {
+      // Pick random location across the whole screen on every click/touch
+      const { x, y } = getRandomScreenCoords();
 
       smashCount++;
       document.getElementById('smash-count').textContent = smashCount;
@@ -760,21 +701,20 @@
       spawnParticles(x, y, 16);
       spawnFlyingStars(x, y, 6);
 
-      const photoChance = currentTheme === 'family' ? 0.35 : 0.20;
+      // Random chance for Photo cutout (~30%), else Letter (if pressed) or Emoji
+      const photoChance = currentTheme === 'family' ? 0.35 : 0.22;
       const roll = Math.random();
 
       if (roll < photoChance) {
         spawnPhoto(x, y);
       } else if (char && char.length === 1 && /[a-zA-Z0-9]/.test(char)) {
         spawnLetter(char, x, y);
-        if (Math.random() < 0.4) {
-          spawnEmoji(x + (Math.random() - 0.5) * 120, y + (Math.random() - 0.5) * 120);
-        }
       } else {
-        spawnEmoji(x, y);
-        if (Math.random() < 0.4) {
+        if (Math.random() < 0.5) {
+          spawnEmoji(x, y);
+        } else {
           const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
-          spawnLetter(letters[Math.floor(Math.random() * letters.length)], x + (Math.random() - 0.5) * 100, y + (Math.random() - 0.5) * 100);
+          spawnLetter(letters[Math.floor(Math.random() * letters.length)], x, y);
         }
       }
 
@@ -804,9 +744,8 @@
 
       for (let i = 0; i < 6; i++) {
         setTimeout(() => {
-          const rx = Math.random() * (window.innerWidth - 200) + 100;
-          const ry = Math.random() * (window.innerHeight - 300) + 100;
-          spawnPhoto(rx, ry);
+          const { x, y } = getRandomScreenCoords();
+          spawnPhoto(x, y);
         }, i * 280);
       }
 
@@ -815,66 +754,34 @@
       }, 2600);
     }
 
+    // Keyboard event listener (press any key -> pop anywhere on screen)
     document.addEventListener('keydown', e => {
       if (!['F5', 'F11', 'F12'].includes(e.key) && !e.ctrlKey && !e.metaKey) {
         e.preventDefault();
       }
-      triggerAction(e.key.length === 1 ? e.key : '🌟');
+      triggerAction(e.key.length === 1 ? e.key : null);
     });
 
+    // Mouse / Pointer click listener (click anywhere -> pop anywhere on screen)
     document.addEventListener('pointerdown', e => {
-      if (e.target.closest('#top-hud') || e.target.closest('#virtual-keyboard')) return;
-      lastX = e.clientX;
-      lastY = e.clientY;
-      triggerAction(null, e.clientX, e.clientY);
+      if (e.target.closest('#top-hud')) return;
+      triggerAction(null);
     });
 
+    // Touch listener for mobile & tablets (multi-touch supported)
     document.addEventListener('touchstart', e => {
-      if (e.target.closest('#top-hud') || e.target.closest('#virtual-keyboard')) return;
+      if (e.target.closest('#top-hud')) return;
       e.preventDefault();
-      Array.from(e.changedTouches).forEach(touch => {
-        lastX = touch.clientX;
-        lastY = touch.clientY;
-        triggerAction(null, touch.clientX, touch.clientY);
+      Array.from(e.changedTouches).forEach(() => {
+        triggerAction(null);
       });
     }, { passive: false });
 
-    const VK_LAYOUT = [
-      { id: 'vk-row-num', keys: ['1','2','3','4','5','6','7','8','9','0'] },
-      { id: 'vk-row-1', keys: ['Q','W','E','R','T','Y','U','I','O','P'] },
-      { id: 'vk-row-2', keys: ['A','S','D','F','G','H','J','K','L'] },
-      { id: 'vk-row-3', keys: ['Z','X','C','V','B','N','M','💖','⭐'] }
-    ];
-
-    VK_LAYOUT.forEach(rowInfo => {
-      const container = document.getElementById(rowInfo.id);
-      rowInfo.keys.forEach(key => {
-        const btn = document.createElement('button');
-        btn.className = 'vk-key' + (['💖','⭐'].includes(key) ? ' special-key' : '');
-        btn.textContent = key;
-        btn.setAttribute('type', 'button');
-        btn.setAttribute('tabindex', '-1');
-
-        const trigger = (evt) => {
-          evt.preventDefault();
-          btn.classList.add('pressed');
-          setTimeout(() => btn.classList.remove('pressed'), 140);
-          const rect = btn.getBoundingClientRect();
-          const targetX = rect.left + rect.width / 2;
-          const targetY = rect.top - Math.random() * 120 - 80;
-          triggerAction(key, targetX, targetY);
-        };
-
-        btn.addEventListener('touchstart', trigger, { passive: false });
-        btn.addEventListener('mousedown', trigger);
-        container.appendChild(btn);
-      });
-    });
-
+    // HUD controls
     const themeSelect = document.getElementById('theme-selector');
     themeSelect.addEventListener('change', e => {
       currentTheme = e.target.value;
-      triggerAction('🌟');
+      triggerAction(null);
     });
 
     const soundBtn = document.getElementById('sound-btn');
@@ -896,15 +803,12 @@
       }
     });
 
+    // Idle attract animation after 3.5s
     let idleTimer = null;
     function startIdleTimer() {
       clearInterval(idleTimer);
       idleTimer = setInterval(() => {
-        const x = Math.random() * (window.innerWidth - 160) + 80;
-        const y = Math.random() * (window.innerHeight - 300) + 120;
-        lastX = x;
-        lastY = y;
-        triggerAction(null, x, y);
+        triggerAction(null);
       }, 3500);
     }
 
