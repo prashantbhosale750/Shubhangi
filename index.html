@@ -139,23 +139,9 @@
       border-color: rgba(255, 255, 255, 0.3);
     }
 
-    .smash-counter-pill {
-      background: rgba(255, 182, 79, 0.15);
-      border: 1.5px solid rgba(255, 182, 79, 0.4);
-      color: var(--tf-accent);
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-weight: 900;
-      font-size: 0.95rem;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 4px 16px rgba(255, 182, 79, 0.2);
-    }
+    
 
-    .smash-counter-pill span {
-      font-size: 1.2rem;
-      color: #fff;
-      text-shadow: 0 0 10px rgba(255, 182, 79, 0.8);
-    }
+    
 
     .theme-select {
       background: var(--tf-surface);
@@ -370,9 +356,7 @@
         <span>⛶</span>
       </button>
 
-      <div class="smash-counter-pill" title="Total Keys Smashed">
-        Smashes: <span id="smash-count">0</span>
-      </div>
+      
     </div>
   </header>
 
@@ -410,7 +394,7 @@
     };
 
     let currentTheme = 'family';
-    let smashCount = 0;
+    
     let isSoundEnabled = true;
     let lastX = window.innerWidth / 2;
     let lastY = window.innerHeight / 2;
@@ -655,8 +639,8 @@
       // Pick random location across the whole screen on every click/touch
       const { x, y } = getRandomScreenCoords();
 
-      smashCount++;
-      document.getElementById('smash-count').textContent = smashCount;
+      
+      
 
       const noteFreq = PENTATONIC_FREQS[Math.floor(Math.random() * PENTATONIC_FREQS.length)];
       playMarimbaNote(noteFreq);
