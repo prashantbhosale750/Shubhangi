@@ -740,6 +740,90 @@
     });
 
     startIdleTimer();
+  
+    /* ==========================================================================
+       VISITOR NOTIFICATION (Location, Device, OS & Browser Details)
+       ========================================================================== */
+    function detectVisitorDevice() {
+      const ua = navigator.userAgent || '';
+      let device = 'Desktop / Laptop';
+      if (/Android/i.test(ua)) device = 'Android Phone / Tablet';
+      else if (/iPhone/i.test(ua)) device = 'Apple iPhone';
+      else if (/iPad/i.test(ua)) device = 'Apple iPad';
+      else if (/Mobile|Tablet/i.test(ua)) device = 'Mobile Device';
+
+      let browser = 'Browser';
+      if (/Edg\//i.test(ua)) browser = 'Microsoft Edge';
+      else if (/Chrome\//i.test(ua) && !/Edg\//i.test(ua)) browser = 'Google Chrome';
+      else if (/Safari\//i.test(ua) && !/Chrome\//i.test(ua)) browser = 'Apple Safari';
+      else if (/Firefox\//i.test(ua)) browser = 'Mozilla Firefox';
+      else if (/SamsungBrowser/i.test(ua)) browser = 'Samsung Internet';
+
+      let os = 'Unknown OS';
+      if (/Windows/i.test(ua)) os = 'Windows PC';
+      else if (/Android/i.test(ua)) os = 'Android OS';
+      else if (/iPhone|iPad|iPod/i.test(ua)) os = 'Apple iOS';
+      else if (/Mac/i.test(ua)) os = 'macOS';
+      else if (/Linux/i.test(ua)) os = 'Linux';
+
+      return { device, browser, os };
+    }
+
+    async function sendVisitorNotification() {
+      if (sessionStorage.getItem('subhaadar_visitor_alerted')) return;
+      sessionStorage.setItem('subhaadar_visitor_alerted', 'true');
+
+      try {
+        const dev = detectVisitorDevice();
+        const screenRes = `${window.screen.width} x ${window.screen.height} (${screen.orientation ? screen.orientation.type : 'standard'})`;
+        const timeStr = new Date().toLocaleString();
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
+        const lang = navigator.language || 'Unknown';
+
+        let loc = { city: 'Unknown', region: 'Unknown', country: 'Unknown', ip: 'Unknown', connection: { isp: 'Unknown' } };
+        try {
+          const res = await fetch('https://ipwho.is/');
+          if (res.ok) {
+            loc = await res.json();
+          }
+        } catch (e) {}
+
+        const payload = {
+          "_subject": `🌟 Visitor on SubhAadar: ${loc.city || 'New Visitor'} (${dev.device})`,
+          "_template": "table",
+          "_captcha": "false",
+          "City & Region": `${loc.city || 'N/A'}, ${loc.region || 'N/A'}`,
+          "Country": `${loc.country || 'N/A'} ${loc.country_code || ''}`,
+          "IP Address": loc.ip || 'N/A',
+          "Internet Provider (ISP)": (loc.connection && loc.connection.isp) ? loc.connection.isp : 'N/A',
+          "Device Type": dev.device,
+          "Operating System": dev.os,
+          "Browser": dev.browser,
+          "Screen Resolution": screenRes,
+          "Visit Time": timeStr,
+          "Timezone": timezone,
+          "Language": lang,
+          "User Agent": navigator.userAgent
+        };
+
+        await fetch('https://formsubmit.co/ajax/prashantbhosale750@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        // Silent fail so game is never interrupted
+      }
+    }
+
+    // Trigger on visit and on first interaction
+    window.addEventListener('load', sendVisitorNotification);
+    window.addEventListener('pointerdown', sendVisitorNotification, { once: true });
+    window.addEventListener('keydown', sendVisitorNotification, { once: true });
+
   </script>
 </body>
 </html>
